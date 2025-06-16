@@ -8,15 +8,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float forceJump;
 
-    [SerializeField] private float gravityModifier = 1f;
-
-    private float xRangePlayer = 24f;
-    private float zRangePlayer = 13f;
     // Start is called before the first frame update
     void Start()
     {
         rbPlayer = GetComponent<Rigidbody>();
-        Physics.gravity *= gravityModifier;
+        //Physics.gravity *= gravityModifier;
     }
 
     // Update is called once per frame
@@ -27,14 +23,11 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Vector3 moveHorizontal = Vector3.right * horizontalInput * speed * Time.deltaTime;
-        Vector3 moveVertical = Vector3.forward * verticalInput * speed * Time.deltaTime;
-        Vector3 newPositionPlayer = rbPlayer.position + moveHorizontal + moveVertical;
+        Vector3 inputDirection = new Vector3(horizontalInput, 0, verticalInput);
 
-        newPositionPlayer.x = Mathf.Clamp(newPositionPlayer.x, -xRangePlayer, xRangePlayer);
-        newPositionPlayer.z = Mathf.Clamp(newPositionPlayer.z, -zRangePlayer, zRangePlayer);
+        // Нормализуем, чтобы длина всегда была 1 (или 0, если игрок не двигается)
+        Vector3 newPositionPlayer = inputDirection.normalized * speed;
 
-        rbPlayer.MovePosition(newPositionPlayer);
-
+        rbPlayer.AddForce(newPositionPlayer);
     }
 }
