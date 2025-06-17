@@ -1,23 +1,15 @@
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : Character
 {
-    private Rigidbody rbEnemy;
-    private GameObject player;
+    public EnemyType enemyType;
 
-    private EnemyType enemyType;
-
-    // Start is called before the first frame update
     void Start()
     {
-        rbEnemy = GetComponent<Rigidbody>();
-        player = GameObject.Find("Player");
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-
+        if (enemyType == EnemyType.Skeleton)
+        {
+            InvokeRepeating(nameof(Fire), 2f, 0.5f);
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -26,5 +18,12 @@ public class EnemyController : MonoBehaviour
             Destroy(collision.gameObject);
             Debug.Log("Player Destroy!");
         }
+    }
+    void Fire()
+    {
+        Vector3 shootOffset = new Vector3(0, 0, -0.8f);
+        Vector3 spawnPosition = transform.position + shootOffset;
+        Quaternion shootRotation = Quaternion.LookRotation(Vector3.back);
+        Instantiate(projectilePrefab, spawnPosition, shootRotation);
     }
 }

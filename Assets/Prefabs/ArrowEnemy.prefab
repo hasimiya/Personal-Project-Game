@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 1147135541720966869}
   - component: {fileID: 2675804650125688300}
   - component: {fileID: 3433684505978607794}
-  - component: {fileID: 1655831291173098983}
   - component: {fileID: 772060689067724871}
+  - component: {fileID: 1655831291173098983}
   - component: {fileID: 4347805009777438822}
-  m_Layer: 0
-  m_Name: Arrow
+  m_Layer: 7
+  m_Name: ArrowEnemy
   m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8b5f6d7f22e831e4e85f42b0969cb0f5, type: 2}
+  - {fileID: 2100000, guid: c8c2fbcd78e5f9f4fb252a590b59c058, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,19 +108,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1655831291173098983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2427397596121555825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f807564193dd68843886cd5c080b8e3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 30
 --- !u!54 &772060689067724871
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -148,6 +135,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1655831291173098983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2427397596121555825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f807564193dd68843886cd5c080b8e3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 30
+  turnRotation: {x: 0, y: 180, z: 0}
+  tag: Bound
 --- !u!114 &4347805009777438822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,3 +162,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7b3ca9856b46949b374b89b676759c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrowType: 1

@@ -241,13 +241,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 736ea619506006340a1c9784c34021a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalInput: 0
-  verticalInput: 0
   speed: 15
-  forceJump: 5
   projectilePrefab: {fileID: 2427397596121555825, guid: 08aa7ce2b817e614f9c6cdb961eacfe4,
     type: 3}
   projectileSpawnPoint: {fileID: 1575954630}
+  horizontalInput: 0
+  verticalInput: 0
+  forceJump: 5
 --- !u!54 &38368535
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -287,9 +287,8 @@ GameObject:
   - component: {fileID: 92837411}
   - component: {fileID: 92837410}
   - component: {fileID: 92837409}
-  - component: {fileID: 92837406}
-  - component: {fileID: 92837413}
   - component: {fileID: 92837414}
+  - component: {fileID: 92837406}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -309,13 +308,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 736ea619506006340a1c9784c34021a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalInput: 0
-  verticalInput: 0
-  speed: 50
-  forceJump: 5
+  speed: 20
   projectilePrefab: {fileID: 2427397596121555825, guid: 08aa7ce2b817e614f9c6cdb961eacfe4,
     type: 3}
   projectileSpawnPoint: {fileID: 1575954630}
+  horizontalInput: 0
+  verticalInput: 0
+  forceJump: 5
 --- !u!65 &92837409
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -395,40 +394,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92837405}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.03, y: 0.5, z: -4.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1575954630}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &92837413
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 92837405}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!54 &92837414
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -471,7 +444,7 @@ GameObject:
   - component: {fileID: 275157490}
   - component: {fileID: 275157485}
   - component: {fileID: 275157491}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Werewolf
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -491,6 +464,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  turnRotation: {x: 0, y: 180, z: 0}
+  tag: Bound
 --- !u!65 &275157486
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -616,6 +591,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b80ea4ea48c44418bd609dbfd773e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  projectilePrefab: {fileID: 0}
+  projectileSpawnPoint: {fileID: 0}
+  enemyType: 3
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,7 +1313,7 @@ GameObject:
   - component: {fileID: 1214890793}
   - component: {fileID: 1214890792}
   - component: {fileID: 1214890791}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Skeleton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1353,6 +1332,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b80ea4ea48c44418bd609dbfd773e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  projectilePrefab: {fileID: 2427397596121555825, guid: d37c5ec831d8b06428104acddc08c30d,
+    type: 3}
+  projectileSpawnPoint: {fileID: 1469782977}
+  enemyType: 2
 --- !u!114 &1214890792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1366,6 +1350,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  turnRotation: {x: 0, y: 180, z: 0}
+  tag: Bound
 --- !u!54 &1214890793
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1473,10 +1459,11 @@ Transform:
   m_GameObject: {fileID: 1214890790}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.03, y: 0.5, z: 12}
+  m_LocalPosition: {x: -0.03, y: 0.5, z: 7.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1469782977}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1296689721
@@ -1585,6 +1572,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1469782976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1469782977}
+  m_Layer: 6
+  m_Name: Arrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1469782977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469782976}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1214890797}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1525731004
 GameObject:
   m_ObjectHideFlags: 0
@@ -1728,7 +1746,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1575954630}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1764,7 +1782,7 @@ GameObject:
   - component: {fileID: 1654930073}
   - component: {fileID: 1654930072}
   - component: {fileID: 1654930071}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Goblin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1783,6 +1801,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b80ea4ea48c44418bd609dbfd773e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  projectilePrefab: {fileID: 0}
+  projectileSpawnPoint: {fileID: 0}
+  enemyType: 1
 --- !u!114 &1654930072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1796,6 +1818,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  turnRotation: {x: 0, y: 180, z: 0}
+  tag: Bound
 --- !u!54 &1654930073
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1903,7 +1927,7 @@ Transform:
   m_GameObject: {fileID: 1654930070}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -23, y: 0.5, z: 2.8}
+  m_LocalPosition: {x: -23, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

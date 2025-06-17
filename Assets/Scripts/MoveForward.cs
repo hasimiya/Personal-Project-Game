@@ -3,30 +3,30 @@ using UnityEngine;
 public class MoveForward : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
-    private Rigidbody rbEnemy;
-    private Vector3 moveForward;
+    [SerializeField] private Vector3 turnRotation = new Vector3(0, 180, 0);
+    [SerializeField] private string tag = "Bound";
+
+    private Rigidbody rb;
     private bool hasJustTurned = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        rbEnemy = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        //transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        rbEnemy.velocity = transform.forward.normalized * speed;
-
+        rb.velocity = transform.forward.normalized * speed;
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Bound") && !hasJustTurned)
+        if (collision.gameObject.CompareTag(tag) && !hasJustTurned)
         {
-            Quaternion newRotation = Quaternion.Euler(0, 180, 0);
-            rbEnemy.MoveRotation(rbEnemy.rotation * newRotation);
-            rbEnemy.velocity = Vector3.zero;
+            Quaternion newRotation = Quaternion.Euler(turnRotation);
+            rb.MoveRotation(rb.rotation * newRotation);
+            rb.velocity = Vector3.zero;
             hasJustTurned = true;
         }
     }
