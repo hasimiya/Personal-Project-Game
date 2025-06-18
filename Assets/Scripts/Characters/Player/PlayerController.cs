@@ -25,6 +25,7 @@ public class PlayerController : Character
     private void FixedUpdate()
     {
         Vector3 inputDirection = new Vector3(horizontalInput, 0, verticalInput);
-        Move(inputDirection);
+        //Move(inputDirection);
+        rbCharacter.velocity = inputDirection.normalized * speed;
     }
 }

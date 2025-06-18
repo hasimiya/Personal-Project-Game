@@ -1,24 +1,15 @@
 using UnityEngine;
 
-public class MoveForward : MonoBehaviour
+public class TurnOnCollision : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
     [SerializeField] private Vector3 turnRotation = new Vector3(0, 180, 0);
     [SerializeField] private string tag = "Bound";
 
     private Rigidbody rb;
     private bool hasJustTurned = false;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        rb.velocity = transform.forward.normalized * speed;
     }
     private void OnCollisionEnter(Collision collision)
     {

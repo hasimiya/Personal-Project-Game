@@ -1,17 +1,16 @@
 using UnityEngine;
-
 public enum ArrowType
 {
     Player,
     Enemy
 }
-public class DestroyOfObjects : MonoBehaviour
+public class DestroyOnHit : MonoBehaviour
 {
     [SerializeField] private ArrowType arrowType;
     private void OnCollisionEnter(Collision collision)
     {
         string tag = collision.gameObject.tag;
-        if ((tag == "Player" && arrowType == ArrowType.Enemy) || (tag == "Enemy" && arrowType == ArrowType.Player))
+        if ((tag == "Player" && arrowType == ArrowType.Enemy) || (tag == "Enemy" && arrowType == ArrowType.Player) || tag == "Arrow")
         {
             Debug.Log($"{tag} Destroy!");
             Destroy(gameObject);
