@@ -8,7 +8,7 @@ public class SpawnManager : MonoBehaviour
     private float spawnRangeX = 23;
     private float spawnRangeZ = 8;
     private float spawnZ = 10;
-    private float offsetY = 0.5f;
+    //private float offsetY = 0.5f;
 
     public int enemyCount;
     public int waveNumber = 1;
@@ -57,7 +57,7 @@ public class SpawnManager : MonoBehaviour
 
     Vector3 GenerateRandomSpawnPosition(float x, float z)
     {
-        return new Vector3(x, offsetY, z);
+        return new Vector3(x, 0, z);
     }
 }
 // Pisus

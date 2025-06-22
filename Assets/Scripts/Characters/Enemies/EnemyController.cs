@@ -21,7 +21,7 @@ public class EnemyController : Character
     }
     void Fire()
     {
-        Vector3 shootOffset = new Vector3(0, 0, -0.8f);
+        Vector3 shootOffset = new Vector3(0, 1.5f, -0.8f);
         Vector3 spawnPosition = transform.position + shootOffset;
         Quaternion shootRotation = Quaternion.LookRotation(Vector3.back);
         Instantiate(projectilePrefab, spawnPosition, shootRotation);
