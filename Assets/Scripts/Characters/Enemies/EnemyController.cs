@@ -3,9 +3,11 @@ using UnityEngine;
 public class EnemyController : Character
 {
     public EnemyType enemyType;
+    private GameManager gameManager;
 
     void Start()
     {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         if (enemyType == EnemyType.Skeleton)
         {
             InvokeRepeating(nameof(Fire), 2f, 0.5f);
@@ -15,6 +17,7 @@ public class EnemyController : Character
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            gameManager.restartGame.gameObject.SetActive(true);
             Destroy(collision.gameObject);
             Debug.Log("Player Destroy!");
         }

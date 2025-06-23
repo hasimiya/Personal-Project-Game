@@ -14,11 +14,11 @@ public class SpawnManager : MonoBehaviour
     public int waveNumber = 1;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        SpawnPowerUp();
-        SpawnEnemy(waveNumber);
-    }
+    //void Start()
+    //{
+    //    SpawnPowerUp();
+    //    SpawnEnemy(waveNumber);
+    //}
 
     // Update is called once per frame
     void Update()
@@ -31,24 +31,27 @@ public class SpawnManager : MonoBehaviour
             SpawnPowerUp();
         }
     }
-    void SpawnEnemy(int waveNumber)
+    public void SpawnEnemy(int waveNumber)
     {
 
-
-        for (int i = 0; i < waveNumber; i++)
+        while (true)
         {
-            int indexPrefabs = Random.Range(1, enemyPrefabs.Length);
-            float spawnPositionX = Random.Range(-spawnRangeX, spawnRangeX);
-            float spawnPositionZ = Random.Range(-spawnRangeZ, spawnRangeZ);
+            for (int i = 0; i < waveNumber; i++)
+            {
+                int indexPrefabs = Random.Range(1, enemyPrefabs.Length);
+                float spawnPositionX = Random.Range(-spawnRangeX, spawnRangeX);
 
-            Instantiate(enemyPrefabs[0], GenerateRandomSpawnPosition(spawnPositionX, spawnZ), enemyPrefabs[0].transform.rotation);
 
-            Instantiate(enemyPrefabs[indexPrefabs], GenerateRandomSpawnPosition(spawnPositionX, spawnPositionZ), enemyPrefabs[indexPrefabs].transform.rotation);
-            Instantiate(enemyPrefabs[indexPrefabs], GenerateRandomSpawnPosition(spawnPositionX, spawnPositionZ), enemyPrefabs[indexPrefabs].transform.rotation);
+                Instantiate(enemyPrefabs[0], GenerateRandomSpawnPosition(spawnPositionX, spawnZ), enemyPrefabs[0].transform.rotation);
 
+                Instantiate(enemyPrefabs[indexPrefabs], GenerateRandomSpawnPosition(), enemyPrefabs[indexPrefabs].transform.rotation);
+                Instantiate(enemyPrefabs[indexPrefabs], GenerateRandomSpawnPosition(), enemyPrefabs[indexPrefabs].transform.rotation);
+
+            }
         }
+
     }
-    void SpawnPowerUp()
+    public void SpawnPowerUp()
     {
         float spawnPositionX = Random.Range(-spawnRangeX, spawnRangeX);
         float spawnPositionZ = Random.Range(-spawnRangeZ, spawnRangeZ);
@@ -58,6 +61,12 @@ public class SpawnManager : MonoBehaviour
     Vector3 GenerateRandomSpawnPosition(float x, float z)
     {
         return new Vector3(x, 0, z);
+    }
+    Vector3 GenerateRandomSpawnPosition()
+    {
+        float spawnPositionX = Random.Range(-spawnRangeX, spawnRangeX);
+        float spawnPositionZ = Random.Range(-spawnRangeZ, spawnRangeZ);
+        return new Vector3(spawnPositionX, 0, spawnPositionZ);
     }
 }
 // Pisus
