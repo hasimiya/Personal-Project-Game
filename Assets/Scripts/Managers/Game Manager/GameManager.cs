@@ -4,19 +4,23 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    // UI variables
     public GameObject pauseSrceen;
+    public GameObject titleScreen;
+    public GameObject gameOverScreen;
+
     public Button restartGame;
+    public Button startGame;
 
     private SpawnManager spawnManager;
 
     private bool isPaused = false;
-    private bool isGameActive = false;
+    public bool isGameActive = false;
 
     // Start is called before the first frame update
     void Start()
     {
         spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
-        StartGame();
     }
 
     // Update is called once per frame
@@ -46,10 +50,16 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    void StartGame()
+    public void StartGame()
     {
         isGameActive = true;
         spawnManager.SpawnPowerUp();
         spawnManager.SpawnEnemy(spawnManager.waveNumber);
+        titleScreen.gameObject.SetActive(false);
+    }
+    public void GameOver()
+    {
+        isGameActive = false;
+        gameOverScreen.gameObject.SetActive(true);
     }
 }

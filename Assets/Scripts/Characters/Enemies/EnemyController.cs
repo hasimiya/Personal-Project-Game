@@ -20,6 +20,7 @@ public class EnemyController : Character
             gameManager.restartGame.gameObject.SetActive(true);
             Destroy(collision.gameObject);
             Debug.Log("Player Destroy!");
+            gameManager.GameOver();
         }
     }
     void Fire()

@@ -13,18 +13,17 @@ public class SpawnManager : MonoBehaviour
     public int enemyCount;
     public int waveNumber = 1;
 
-    // Start is called before the first frame update
-    //void Start()
-    //{
-    //    SpawnPowerUp();
-    //    SpawnEnemy(waveNumber);
-    //}
+    private GameManager gameManager;
+    private void Start()
+    {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+    }
 
     // Update is called once per frame
     void Update()
     {
         enemyCount = FindObjectsByType<EnemyController>(FindObjectsSortMode.None).Length;
-        if (enemyCount == 0)
+        if (enemyCount == 0 && gameManager.isGameActive == true)
         {
             waveNumber++;
             SpawnEnemy(waveNumber);
@@ -33,21 +32,15 @@ public class SpawnManager : MonoBehaviour
     }
     public void SpawnEnemy(int waveNumber)
     {
-
-        while (true)
+        for (int i = 0; i < waveNumber; i++)
         {
-            for (int i = 0; i < waveNumber; i++)
-            {
-                int indexPrefabs = Random.Range(1, enemyPrefabs.Length);
-                float spawnPositionX = Random.Range(-spawnRangeX, spawnRangeX);
+            int indexPrefabs = Random.Range(1, enemyPrefabs.Length);
+            float spawnPositionX = Random.Range(-spawnRangeX, spawnRangeX);
 
+            Instantiate(enemyPrefabs[0], GenerateRandomSpawnPosition(spawnPositionX, spawnZ), enemyPrefabs[0].transform.rotation);
 
-                Instantiate(enemyPrefabs[0], GenerateRandomSpawnPosition(spawnPositionX, spawnZ), enemyPrefabs[0].transform.rotation);
-
-                Instantiate(enemyPrefabs[indexPrefabs], GenerateRandomSpawnPosition(), enemyPrefabs[indexPrefabs].transform.rotation);
-                Instantiate(enemyPrefabs[indexPrefabs], GenerateRandomSpawnPosition(), enemyPrefabs[indexPrefabs].transform.rotation);
-
-            }
+            Instantiate(enemyPrefabs[indexPrefabs], GenerateRandomSpawnPosition(), enemyPrefabs[indexPrefabs].transform.rotation);
+            Instantiate(enemyPrefabs[indexPrefabs], GenerateRandomSpawnPosition(), enemyPrefabs[indexPrefabs].transform.rotation);
         }
 
     }
@@ -69,4 +62,3 @@ public class SpawnManager : MonoBehaviour
         return new Vector3(spawnPositionX, 0, spawnPositionZ);
     }
 }
-// Pisus
