@@ -5,6 +5,8 @@ public class EnemyController : Character
     public EnemyType enemyType;
     private GameManager gameManager;
 
+    public int pointValue;
+
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
@@ -17,7 +19,6 @@ public class EnemyController : Character
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            gameManager.restartGame.gameObject.SetActive(true);
             Destroy(collision.gameObject);
             Debug.Log("Player Destroy!");
             gameManager.GameOver();

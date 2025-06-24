@@ -166,6 +166,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   projectileSpawnPoint: {fileID: 0}
   enemyType: 1
+  pointValue: 5
 --- !u!114 &471526254448010452
 MonoBehaviour:
   m_ObjectHideFlags: 0

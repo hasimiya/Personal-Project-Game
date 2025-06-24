@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,9 +7,7 @@ public class GameManager : MonoBehaviour
     public GameObject pauseSrceen;
     public GameObject titleScreen;
     public GameObject gameOverScreen;
-
-    public Button restartGame;
-    public Button startGame;
+    public GameObject uiScreen;
 
     private SpawnManager spawnManager;
 
@@ -53,9 +50,13 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         isGameActive = true;
+
         spawnManager.SpawnPowerUp();
         spawnManager.SpawnEnemy(spawnManager.waveNumber);
+
         titleScreen.gameObject.SetActive(false);
+        uiScreen.gameObject.SetActive(true);
+
     }
     public void GameOver()
     {

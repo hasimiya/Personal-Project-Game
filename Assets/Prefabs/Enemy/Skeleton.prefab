@@ -199,6 +199,7 @@ MonoBehaviour:
     type: 3}
   projectileSpawnPoint: {fileID: 5568025848145157739}
   enemyType: 2
+  pointValue: 15
 --- !u!114 &5319257236941925849
 MonoBehaviour:
   m_ObjectHideFlags: 0
