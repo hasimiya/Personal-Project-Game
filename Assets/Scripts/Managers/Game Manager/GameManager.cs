@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject uiScreen;
 
     private SpawnManager spawnManager;
+    private UIManager uiManager;
 
     private bool isPaused = false;
     public bool isGameActive = false;
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
+        uiScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -51,16 +54,46 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = true;
 
-        spawnManager.SpawnPowerUp();
+        uiManager.score = 0;
+
+        uiManager.scoreText.text = $"Score: {uiManager.score}";
+        uiManager.UpdateLives(3);
+
+        spawnManager.SpawnPowerUpPotion();
         spawnManager.SpawnEnemy(spawnManager.waveNumber);
 
         titleScreen.gameObject.SetActive(false);
-        uiScreen.gameObject.SetActive(true);
+        uiScreen.SetActive(true);
 
     }
     public void GameOver()
     {
         isGameActive = false;
         gameOverScreen.gameObject.SetActive(true);
+
+        Debug.Log("Game Over!");
+        Debug.Log("Player Destroyed!");
+
+        DestroyObjectsGameOver();
+    }
+    void DestroyObjectsGameOver()
+    {
+        Destroy(GameObject.Find("Player"));
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] powerUps = GameObject.FindGameObjectsWithTag("PowerUp");
+        GameObject[] arrows = GameObject.FindGameObjectsWithTag("Arrow");
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+        foreach (GameObject powerUp in powerUps)
+        {
+            Destroy(powerUp);
+        }
+        foreach (GameObject arrow in arrows)
+        {
+            Destroy(arrow);
+        }
     }
 }

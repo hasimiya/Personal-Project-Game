@@ -3,7 +3,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemyPrefabs;
-    [SerializeField] private GameObject powerUpPrefab;
+    [SerializeField] private GameObject[] powerUpPrefabs;
 
     private float spawnRangeX = 23;
     private float spawnRangeZ = 8;
@@ -14,7 +14,7 @@ public class SpawnManager : MonoBehaviour
     public int waveNumber = 1;
 
     private GameManager gameManager;
-    private void Start()
+    void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
@@ -27,7 +27,7 @@ public class SpawnManager : MonoBehaviour
         {
             waveNumber++;
             SpawnEnemy(waveNumber);
-            SpawnPowerUp();
+            SpawnPowerUpPotion();
         }
     }
     public void SpawnEnemy(int waveNumber)
@@ -44,11 +44,18 @@ public class SpawnManager : MonoBehaviour
         }
 
     }
-    public void SpawnPowerUp()
+    public void SpawnPowerUpPotion()
     {
         float spawnPositionX = Random.Range(-spawnRangeX, spawnRangeX);
         float spawnPositionZ = Random.Range(-spawnRangeZ, spawnRangeZ);
-        Instantiate(powerUpPrefab, GenerateRandomSpawnPosition(spawnPositionX, spawnPositionZ), powerUpPrefab.transform.rotation);
+
+        Instantiate(powerUpPrefabs[0], GenerateRandomSpawnPosition(spawnPositionX, spawnPositionZ), powerUpPrefabs[0].transform.rotation);
+    }
+    public void SpawnPowerUpCoin(EnemyController enemy)
+    {
+        GameObject coin = Instantiate(powerUpPrefabs[1], enemy.transform.position, powerUpPrefabs[1].transform.rotation);
+        TakePowerUp takePowerUp = coin.GetComponent<TakePowerUp>();
+        takePowerUp.coinScore = enemy.pointValue;
     }
 
     Vector3 GenerateRandomSpawnPosition(float x, float z)

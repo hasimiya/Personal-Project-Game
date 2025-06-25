@@ -4,12 +4,15 @@ public class EnemyController : Character
 {
     public EnemyType enemyType;
     private GameManager gameManager;
+    private UIManager uiManager;
 
     public int pointValue;
 
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
+
         if (enemyType == EnemyType.Skeleton)
         {
             InvokeRepeating(nameof(Fire), 2f, 0.5f);
@@ -19,9 +22,7 @@ public class EnemyController : Character
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(collision.gameObject);
-            Debug.Log("Player Destroy!");
-            gameManager.GameOver();
+            uiManager.UpdateLives(-1);
         }
     }
     void Fire()

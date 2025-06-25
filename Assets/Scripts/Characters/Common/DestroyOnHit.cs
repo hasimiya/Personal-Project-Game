@@ -10,11 +10,13 @@ public class DestroyOnHit : MonoBehaviour
 
     private GameManager gameManager;
     private UIManager uiManager;
+    private SpawnManager spawnManager;
 
     private void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
+        spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -34,22 +36,23 @@ public class DestroyOnHit : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void HandleTargetCollision(GameObject target, string tag)
+    void HandleTargetCollision(GameObject enemyTarget, string tag)
     {
         if (tag == "Player")
         {
-            gameManager.GameOver();
+            uiManager.UpdateLives(-1);
         }
         if (tag == "Enemy")
         {
-            EnemyController enemy = target.gameObject.GetComponent<EnemyController>();
+            EnemyController enemy = enemyTarget.gameObject.GetComponent<EnemyController>();
             if (enemy != null)
             {
-                uiManager.UpdateScore(enemy.pointValue);
+                Destroy(enemyTarget);
                 Debug.Log("Enemy Destroy!");
+                //spawnManager.SpawnPowerUpCoin(enemy);
+                uiManager.UpdateScore(enemy.pointValue);
             }
         }
-        Destroy(target);
         Destroy(gameObject);
     }
     void HandleArrowCollision(GameObject other)

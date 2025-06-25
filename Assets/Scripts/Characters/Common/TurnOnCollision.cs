@@ -23,7 +23,7 @@ public class TurnOnCollision : MonoBehaviour
     }
     void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Bound"))
+        if (collision.gameObject.CompareTag(tag))
         {
             hasJustTurned = false;
         }
