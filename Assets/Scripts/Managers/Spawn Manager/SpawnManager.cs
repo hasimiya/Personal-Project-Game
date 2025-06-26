@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -8,10 +10,12 @@ public class SpawnManager : MonoBehaviour
     private float spawnRangeX = 23;
     private float spawnRangeZ = 8;
     private float spawnZ = 10;
-    //private float offsetY = 0.5f;
+    private float offsetY = 0.5f;
 
     public int enemyCount;
     public int waveNumber = 1;
+
+    private bool isSpawningNextWave = false;
 
     private GameManager gameManager;
     void Start()
@@ -23,11 +27,11 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         enemyCount = FindObjectsByType<EnemyController>(FindObjectsSortMode.None).Length;
-        if (enemyCount == 0 && gameManager.isGameActive == true)
+        if (enemyCount == 0 && gameManager.isGameActive == true && !isSpawningNextWave)
         {
-            waveNumber++;
-            SpawnEnemy(waveNumber);
-            SpawnPowerUpPotion();
+            isSpawningNextWave = true;
+            SpawnChestCoin();
+            StartCoroutine(SpawnDelayWave());
         }
     }
     public void SpawnEnemy(int waveNumber)
@@ -49,7 +53,7 @@ public class SpawnManager : MonoBehaviour
         float spawnPositionX = Random.Range(-spawnRangeX, spawnRangeX);
         float spawnPositionZ = Random.Range(-spawnRangeZ, spawnRangeZ);
 
-        Instantiate(powerUpPrefabs[0], GenerateRandomSpawnPosition(spawnPositionX, spawnPositionZ), powerUpPrefabs[0].transform.rotation);
+        Instantiate(powerUpPrefabs[0], GenerateRandomSpawnPosition(spawnPositionX, offsetY, spawnPositionZ), powerUpPrefabs[0].transform.rotation);
     }
     public void SpawnPowerUpCoin(EnemyController enemy)
     {
@@ -57,7 +61,18 @@ public class SpawnManager : MonoBehaviour
         TakePowerUp takePowerUp = coin.GetComponent<TakePowerUp>();
         takePowerUp.coinScore = enemy.pointValue;
     }
+    public void SpawnChestCoin()
+    {
+        //GameObject coin = Instantiate(powerUpPrefabs[1], new Vector3(0, offsetY, 0), powerUpPrefabs[1].transform.rotation);
+        //TakePowerUp takePowerUp = coin.GetComponent<TakePowerUp>();
+        //takePowerUp.coinScore = ;
 
+        Instantiate(powerUpPrefabs[1], new Vector3(0, offsetY, 0), powerUpPrefabs[1].transform.rotation);
+    }
+    Vector3 GenerateRandomSpawnPosition(float x, float y, float z)
+    {
+        return new Vector3(x, y, z);
+    }
     Vector3 GenerateRandomSpawnPosition(float x, float z)
     {
         return new Vector3(x, 0, z);
@@ -67,5 +82,13 @@ public class SpawnManager : MonoBehaviour
         float spawnPositionX = Random.Range(-spawnRangeX, spawnRangeX);
         float spawnPositionZ = Random.Range(-spawnRangeZ, spawnRangeZ);
         return new Vector3(spawnPositionX, 0, spawnPositionZ);
+    }
+    IEnumerator SpawnDelayWave()
+    {
+        yield return new WaitForSeconds(5f);
+        waveNumber++;
+        SpawnEnemy(waveNumber);
+        SpawnPowerUpPotion();
+        isSpawningNextWave = false;
     }
 }

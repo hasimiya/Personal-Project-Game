@@ -26,7 +26,8 @@ public class TakePowerUp : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && powerUpType == PowerUpType.Coin)
         {
             Debug.Log($"PowerUp {powerUpType} Taken!");
-            uiManager.UpdateScore(coinScore);
+            //uiManager.UpdateScore(coinScore);
+            uiManager.OpenChest();
             Destroy(gameObject);
         }
     }

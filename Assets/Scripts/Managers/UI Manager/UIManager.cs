@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     public int score;
     public int lives;
 
+    private int coinChest;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,5 +37,15 @@ public class UIManager : MonoBehaviour
         {
             gameManager.GameOver();
         }
+    }
+    public void UpdateCoinChest(int points)
+    {
+        coinChest += points;
+    }
+    public void OpenChest()
+    {
+        int totalCoins = coinChest;
+        UpdateScore(totalCoins);
+        coinChest = 0;
     }
 }

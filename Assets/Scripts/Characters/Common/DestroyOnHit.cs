@@ -11,7 +11,6 @@ public class DestroyOnHit : MonoBehaviour
     private GameManager gameManager;
     private UIManager uiManager;
     private SpawnManager spawnManager;
-
     private void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
@@ -49,8 +48,8 @@ public class DestroyOnHit : MonoBehaviour
             {
                 Destroy(enemyTarget);
                 Debug.Log("Enemy Destroy!");
-                //spawnManager.SpawnPowerUpCoin(enemy);
-                uiManager.UpdateScore(enemy.pointValue);
+                //uiManager.UpdateScore(enemy.pointValue);
+                uiManager.UpdateCoinChest(enemy.pointValue);
             }
         }
         Destroy(gameObject);
