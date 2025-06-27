@@ -48,7 +48,6 @@ public class DestroyOnHit : MonoBehaviour
             {
                 Destroy(enemyTarget);
                 Debug.Log("Enemy Destroy!");
-                //uiManager.UpdateScore(enemy.pointValue);
                 uiManager.UpdateCoinChest(enemy.pointValue);
             }
         }

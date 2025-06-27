@@ -8,12 +8,13 @@ public enum PowerUpType
 public class TakePowerUp : MonoBehaviour
 {
     public PowerUpType powerUpType;
-    public int coinScore;
 
     private UIManager uiManager;
+    private GameManager gameManager;
     private void Start()
     {
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -26,8 +27,8 @@ public class TakePowerUp : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && powerUpType == PowerUpType.Coin)
         {
             Debug.Log($"PowerUp {powerUpType} Taken!");
-            //uiManager.UpdateScore(coinScore);
             uiManager.OpenChest();
+            gameManager.CollectCoin();
             Destroy(gameObject);
         }
     }

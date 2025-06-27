@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private GameObject[] powerUpPrefabs;
+
+    [SerializeField] private UIManager uiManager;
 
     private float spawnRangeX = 23;
     private float spawnRangeZ = 8;
@@ -13,11 +14,13 @@ public class SpawnManager : MonoBehaviour
     private float offsetY = 0.5f;
 
     public int enemyCount;
-    public int waveNumber = 1;
+    //public int waveNumber = 1;
+    //public int maxWave;
 
     private bool isSpawningNextWave = false;
 
     private GameManager gameManager;
+
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
@@ -29,9 +32,17 @@ public class SpawnManager : MonoBehaviour
         enemyCount = FindObjectsByType<EnemyController>(FindObjectsSortMode.None).Length;
         if (enemyCount == 0 && gameManager.isGameActive == true && !isSpawningNextWave)
         {
-            isSpawningNextWave = true;
-            SpawnChestCoin();
-            StartCoroutine(SpawnDelayWave());
+            if (gameManager.IsLastWave())
+            {
+                isSpawningNextWave = true;
+                SpawnChestCoin();
+            }
+            else
+            {
+                isSpawningNextWave = true;
+                SpawnChestCoin();
+                StartCoroutine(SpawnDelayWave());
+            }
         }
     }
     public void SpawnEnemy(int waveNumber)
@@ -55,18 +66,13 @@ public class SpawnManager : MonoBehaviour
 
         Instantiate(powerUpPrefabs[0], GenerateRandomSpawnPosition(spawnPositionX, offsetY, spawnPositionZ), powerUpPrefabs[0].transform.rotation);
     }
-    public void SpawnPowerUpCoin(EnemyController enemy)
-    {
-        GameObject coin = Instantiate(powerUpPrefabs[1], enemy.transform.position, powerUpPrefabs[1].transform.rotation);
-        TakePowerUp takePowerUp = coin.GetComponent<TakePowerUp>();
-        takePowerUp.coinScore = enemy.pointValue;
-    }
     public void SpawnChestCoin()
     {
         //GameObject coin = Instantiate(powerUpPrefabs[1], new Vector3(0, offsetY, 0), powerUpPrefabs[1].transform.rotation);
         //TakePowerUp takePowerUp = coin.GetComponent<TakePowerUp>();
         //takePowerUp.coinScore = ;
 
+        gameManager.RegisterCoin();
         Instantiate(powerUpPrefabs[1], new Vector3(0, offsetY, 0), powerUpPrefabs[1].transform.rotation);
     }
     Vector3 GenerateRandomSpawnPosition(float x, float y, float z)
@@ -85,10 +91,21 @@ public class SpawnManager : MonoBehaviour
     }
     IEnumerator SpawnDelayWave()
     {
-        yield return new WaitForSeconds(5f);
-        waveNumber++;
-        SpawnEnemy(waveNumber);
-        SpawnPowerUpPotion();
-        isSpawningNextWave = false;
+        if (gameManager.waveNumber < gameManager.maxWave)
+        {
+            yield return StartCoroutine(uiManager.SpawnWaveTimer());
+            gameManager.waveNumber++;
+            uiManager.UpdateWave(gameManager.waveNumber);
+            SpawnEnemy(gameManager.waveNumber);
+            SpawnPowerUpPotion();
+            isSpawningNextWave = false;
+        }
+        else
+        {
+            //yield return new WaitForSeconds(5f);
+            //gameManager.WinGame();
+            //gameManager.CollectCoin();            
+            isSpawningNextWave = false;
+        }
     }
 }

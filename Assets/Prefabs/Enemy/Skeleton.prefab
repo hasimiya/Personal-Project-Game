@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  projectilePrefab: {fileID: 2427397596121555825, guid: d37c5ec831d8b06428104acddc08c30d,
+  projectilePrefab: {fileID: 5661216178112365744, guid: f8be8fc4a937f594b8cdedcb69dc3eba,
     type: 3}
   projectileSpawnPoint: {fileID: 5568025848145157739}
   enemyType: 2

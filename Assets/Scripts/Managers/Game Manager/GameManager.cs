@@ -1,19 +1,28 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject player;
     // UI variables
     public GameObject pauseSrceen;
     public GameObject titleScreen;
-    public GameObject gameOverScreen;
+    public GameObject gameResultScreen;
     public GameObject uiScreen;
+
+    public TextMeshProUGUI gameResultText;
 
     private SpawnManager spawnManager;
     private UIManager uiManager;
 
     private bool isPaused = false;
     public bool isGameActive = false;
+
+    public int waveNumber = 1;
+    public int maxWave;
+
+    public int remainingCoins = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -58,18 +67,34 @@ public class GameManager : MonoBehaviour
 
         uiManager.scoreText.text = $"Score: {uiManager.score}";
         uiManager.UpdateLives(3);
+        uiManager.UpdateWave(waveNumber);
+
+        player.SetActive(true);
 
         spawnManager.SpawnPowerUpPotion();
-        spawnManager.SpawnEnemy(spawnManager.waveNumber);
+        spawnManager.SpawnEnemy(waveNumber);
 
         titleScreen.gameObject.SetActive(false);
         uiScreen.SetActive(true);
+    }
+    public void WinGame()
+    {
+        isGameActive = false;
+        uiScreen.SetActive(false);
+        gameResultScreen.gameObject.SetActive(true);
 
+        gameResultText.text = $"You Win!\nScore: {uiManager.score}";
+        gameResultText.color = Color.white;
+        Debug.Log("You Win!");
+
+        DestroyObjectsGameOver();
     }
     public void GameOver()
     {
         isGameActive = false;
-        gameOverScreen.gameObject.SetActive(true);
+        uiScreen.SetActive(false);
+        gameResultScreen.gameObject.SetActive(true);
+        gameResultText.text = $"Game Over!\nScore: {uiManager.score}";
 
         Debug.Log("Game Over!");
         Debug.Log("Player Destroyed!");
@@ -95,5 +120,23 @@ public class GameManager : MonoBehaviour
         {
             Destroy(arrow);
         }
+    }
+    public void RegisterCoin()
+    {
+        remainingCoins++;
+    }
+
+    public void CollectCoin()
+    {
+        remainingCoins--;
+        if (IsLastWave() && remainingCoins <= 0)
+        {
+            WinGame();
+        }
+    }
+
+    public bool IsLastWave()
+    {
+        return waveNumber == maxWave;
     }
 }
