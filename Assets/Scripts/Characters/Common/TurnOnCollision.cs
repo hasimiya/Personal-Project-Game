@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class TurnOnCollision : MonoBehaviour
 {
-    [SerializeField] private Vector3 turnRotation = new Vector3(0, 180, 0);
-    [SerializeField] private string tag = "Bound";
+    [SerializeField] private Vector3 turnRotation = new(0, 180, 0);
+    [SerializeField] private string tagObject = "Bound";
 
     private Rigidbody rb;
     private bool hasJustTurned = false;
@@ -13,7 +13,7 @@ public class TurnOnCollision : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(tag) && !hasJustTurned)
+        if (collision.gameObject.CompareTag(tagObject) && !hasJustTurned)
         {
             Quaternion newRotation = Quaternion.Euler(turnRotation);
             rb.MoveRotation(rb.rotation * newRotation);
@@ -23,7 +23,7 @@ public class TurnOnCollision : MonoBehaviour
     }
     void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag(tag))
+        if (collision.gameObject.CompareTag(tagObject))
         {
             hasJustTurned = false;
         }

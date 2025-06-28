@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 401476196255865151}
   - component: {fileID: 3495804810061580854}
   - component: {fileID: 471526254448010452}
+  - component: {fileID: 2246100799869684586}
   m_Layer: 6
   m_Name: Goblin
   m_TagString: Enemy
@@ -165,6 +166,9 @@ MonoBehaviour:
   speed: 0
   projectilePrefab: {fileID: 0}
   projectileSpawnPoint: {fileID: 0}
+  deathClip: {fileID: 8300000, guid: 9c87f285d32fa4569b77ddf3a7e6df5e, type: 3}
+  hittingClip: {fileID: 0}
+  shootingClip: {fileID: 0}
   enemyType: 1
   pointValue: 5
 --- !u!114 &471526254448010452
@@ -180,7 +184,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnRotation: {x: 0, y: 180, z: 0}
-  tag: Bound
+  tagObject: Bound
+--- !u!114 &2246100799869684586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550320141470993737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a076a26251a114241beeb7e2d421b98d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipType: 1
 --- !u!1001 &2850690334922232273
 PrefabInstance:
   m_ObjectHideFlags: 0

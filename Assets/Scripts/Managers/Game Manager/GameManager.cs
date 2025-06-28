@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     private SpawnManager spawnManager;
     private UIManager uiManager;
+    private AudioManager audioManager;
 
     private bool isPaused = false;
     public bool isGameActive = false;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     {
         spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
+        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
         uiScreen.SetActive(false);
     }
 
@@ -45,13 +47,13 @@ public class GameManager : MonoBehaviour
         if (isPaused)
         {
             Time.timeScale = 1f;
-            pauseSrceen.gameObject.SetActive(false);
+            pauseSrceen.SetActive(false);
             isPaused = false;
         }
         else
         {
             Time.timeScale = 0f;
-            pauseSrceen.gameObject.SetActive(true);
+            pauseSrceen.SetActive(true);
             isPaused = true;
         }
     }
@@ -74,14 +76,14 @@ public class GameManager : MonoBehaviour
         spawnManager.SpawnPowerUpPotion();
         spawnManager.SpawnEnemy(waveNumber);
 
-        titleScreen.gameObject.SetActive(false);
+        titleScreen.SetActive(false);
         uiScreen.SetActive(true);
     }
     public void WinGame()
     {
         isGameActive = false;
         uiScreen.SetActive(false);
-        gameResultScreen.gameObject.SetActive(true);
+        gameResultScreen.SetActive(true);
 
         gameResultText.text = $"You Win!\nScore: {uiManager.score}";
         gameResultText.color = Color.white;
@@ -91,14 +93,14 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
+        audioManager.GetAudioSource(AudioClipType.AudioClipTypeEnum.Death);
         isGameActive = false;
         uiScreen.SetActive(false);
-        gameResultScreen.gameObject.SetActive(true);
+        gameResultScreen.SetActive(true);
         gameResultText.text = $"Game Over!\nScore: {uiManager.score}";
 
         Debug.Log("Game Over!");
         Debug.Log("Player Destroyed!");
-
         DestroyObjectsGameOver();
     }
     void DestroyObjectsGameOver()

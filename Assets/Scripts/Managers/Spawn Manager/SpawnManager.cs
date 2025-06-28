@@ -8,10 +8,10 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField] private UIManager uiManager;
 
-    private float spawnRangeX = 23;
-    private float spawnRangeZ = 8;
-    private float spawnZ = 10;
-    private float offsetY = 0.5f;
+    private readonly float spawnRangeX = 23;
+    private readonly float spawnRangeZ = 8;
+    private readonly float spawnZ = 10;
+    private readonly float offsetY = 0.5f;
 
     public int enemyCount;
     //public int waveNumber = 1;

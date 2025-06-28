@@ -6,12 +6,6 @@ public class PlayerController : Character
     [SerializeField] private float verticalInput;
     [SerializeField] private float forceJump;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -24,7 +18,7 @@ public class PlayerController : Character
     }
     private void FixedUpdate()
     {
-        Vector3 inputDirection = new Vector3(horizontalInput, 0, verticalInput);
+        Vector3 inputDirection = new(horizontalInput, 0, verticalInput);
         //Move(inputDirection);
         rbCharacter.velocity = inputDirection.normalized * speed;
     }

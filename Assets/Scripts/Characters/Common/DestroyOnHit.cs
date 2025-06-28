@@ -11,11 +11,13 @@ public class DestroyOnHit : MonoBehaviour
     private GameManager gameManager;
     private UIManager uiManager;
     private SpawnManager spawnManager;
+    private AudioManager audioManager;
     private void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
         spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -40,15 +42,21 @@ public class DestroyOnHit : MonoBehaviour
         if (tag == "Player")
         {
             uiManager.UpdateLives(-1);
+            if (uiManager.lives != 0)
+                audioManager.GetAudioSource(AudioClipType.AudioClipTypeEnum.Hitting);
         }
         if (tag == "Enemy")
         {
-            EnemyController enemy = enemyTarget.gameObject.GetComponent<EnemyController>();
-            if (enemy != null)
+            if (enemyTarget != null)
             {
-                Destroy(enemyTarget);
-                Debug.Log("Enemy Destroy!");
-                uiManager.UpdateCoinChest(enemy.pointValue);
+                enemyTarget.TryGetComponent<EnemyController>(out EnemyController enemy);
+                if (enemy != null)
+                {
+                    Debug.Log("Enemy Destroy!");
+                    audioManager.GetAudioSource(AudioClipType.AudioClipTypeEnum.Death);
+                    Destroy(enemyTarget);
+                    uiManager.UpdateCoinChest(enemy.pointValue);
+                }
             }
         }
         Destroy(gameObject);
@@ -58,4 +66,5 @@ public class DestroyOnHit : MonoBehaviour
         Destroy(gameObject);
         Destroy(other);
     }
+
 }

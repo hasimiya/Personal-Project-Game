@@ -6,10 +6,16 @@ public class Character : MonoBehaviour
     [SerializeField] protected float speed;
     [SerializeField] protected GameObject projectilePrefab;
     [SerializeField] protected Transform projectileSpawnPoint;
+    public AudioClip deathClip;
+    public AudioClip hittingClip;
+    public AudioClip shootingClip;
+    public AudioClip powerUpClip;
+    protected AudioManager audioManager;
 
     protected virtual void Awake()
     {
         rbCharacter = GetComponent<Rigidbody>();
+        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
     }
     protected virtual void Move(Vector3 direction)
     {
@@ -26,6 +32,14 @@ public class Character : MonoBehaviour
     protected virtual void Fire(Vector3 direction)
     {
         Debug.Log("Fire!");
+        audioManager.GetAudioSource(AudioClipType.AudioClipTypeEnum.Shooting);
         Instantiate(projectilePrefab, projectileSpawnPoint.position, rbCharacter.rotation);
+    }
+    protected virtual void Fire2()
+    {
+        Debug.Log("Fire!");
+        Quaternion shootRotation = Quaternion.LookRotation(Vector3.back);
+        audioManager.GetAudioSource(AudioClipType.AudioClipTypeEnum.Shooting);
+        Instantiate(projectilePrefab, projectileSpawnPoint.transform.position, shootRotation);
     }
 }

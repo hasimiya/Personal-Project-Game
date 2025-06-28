@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     // Timer variables
     public float currentTime;
     public float startTime = 5f;
-    private bool timerRunning = true;
+    //private bool timerRunning = true;
 
     private int coinChest;
 
@@ -25,12 +25,6 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
     public void UpdateScore(int scoreToAdd)
     {
@@ -64,7 +58,7 @@ public class UIManager : MonoBehaviour
     {
         currentTime = startTime;
         timerText.gameObject.SetActive(true);
-        timerRunning = true;
+        //timerRunning = true;
         while (currentTime > 0)
         {
             currentTime -= Time.deltaTime;

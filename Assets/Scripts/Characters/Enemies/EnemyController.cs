@@ -15,7 +15,7 @@ public class EnemyController : Character
 
         if (enemyType == EnemyType.Skeleton)
         {
-            InvokeRepeating(nameof(Fire), 2f, 0.5f);
+            InvokeRepeating(nameof(Fire2), 2f, 0.5f);
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -23,13 +23,8 @@ public class EnemyController : Character
         if (collision.gameObject.CompareTag("Player"))
         {
             uiManager.UpdateLives(-1);
+            if (uiManager.lives != 0)
+                audioManager.GetAudioSource(AudioClipType.AudioClipTypeEnum.Hitting);
         }
-    }
-    void Fire()
-    {
-        Vector3 shootOffset = new Vector3(0, 1.5f, -0.8f);
-        Vector3 spawnPosition = transform.position + shootOffset;
-        Quaternion shootRotation = Quaternion.LookRotation(Vector3.back);
-        Instantiate(projectilePrefab, spawnPosition, shootRotation);
     }
 }
