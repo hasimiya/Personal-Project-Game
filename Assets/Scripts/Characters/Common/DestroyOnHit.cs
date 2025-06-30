@@ -1,5 +1,4 @@
 using UnityEngine;
-using static ParticleSystemType;
 public enum ArrowType
 {
     Player,
@@ -14,6 +13,7 @@ public class DestroyOnHit : MonoBehaviour
     private SpawnManager spawnManager;
     private AudioManager audioManager;
     private ParticleManager particleManager;
+    private AnimationManager animationManager;
     private void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
@@ -21,6 +21,7 @@ public class DestroyOnHit : MonoBehaviour
         spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
         particleManager = GameObject.Find("Particle Manager").GetComponent<ParticleManager>();
+        animationManager = GameObject.Find("Animation Manager").GetComponent<AnimationManager>();
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -55,11 +56,21 @@ public class DestroyOnHit : MonoBehaviour
                 enemyTarget.TryGetComponent<EnemyController>(out EnemyController enemy);
                 if (enemy != null)
                 {
-                    Debug.Log("Enemy Destroy!");
+                    // Animation
+                    AnimationManager animationManager = gameObject.AddComponent<AnimationManager>();
+                    animationManager.Initialize(enemy.GetAnimator());
+                    animationManager.PlayAnimationDeath();
+
+                    // Audio
                     audioManager.PlaySFX(AudioClipType.AudioClipTypeEnum.Death);
-                    Destroy(enemyTarget);
+
+                    // Destroy
+                    Debug.Log("Enemy Destroy!");
+                    enemy.isAlive = false;
+                    enemy.GetComponent<MoveForward>().StopMoving();
+                    //Destroy(enemyTarget, 1.5f);
                     uiManager.UpdateCoinChest(enemy.pointValue);
-                    particleManager.SpawnParticle(ParticleSystemTypeEnum.Destroyed, enemyTarget.transform.position);
+                    //particleManager.SpawnParticle(ParticleSystemTypeEnum.Destroyed, enemyTarget.transform.position);
                 }
             }
         }

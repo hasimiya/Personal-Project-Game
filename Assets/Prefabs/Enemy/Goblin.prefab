@@ -166,10 +166,8 @@ MonoBehaviour:
   speed: 0
   projectilePrefab: {fileID: 0}
   projectileSpawnPoint: {fileID: 0}
-  deathClip: {fileID: 8300000, guid: 9c87f285d32fa4569b77ddf3a7e6df5e, type: 3}
-  hittingClip: {fileID: 0}
-  shootingClip: {fileID: 0}
   enemyType: 1
+  animator: {fileID: 2850690334914847921}
   pointValue: 5
 --- !u!114 &471526254448010452
 MonoBehaviour:
@@ -197,7 +195,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a076a26251a114241beeb7e2d421b98d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClipType: 1
+  noneClip: {fileID: 0}
+  deathClip: {fileID: 0}
+  hittingClip: {fileID: 0}
+  jumpingClip: {fileID: 0}
+  landingClip: {fileID: 0}
+  shootingClip: {fileID: 0}
+  reloadingClip: {fileID: 0}
+  runningClip: {fileID: 0}
+  walkingClip: {fileID: 0}
+  idleClip: {fileID: 0}
+  explosionClip: {fileID: 0}
+  powerUpClip: {fileID: 0}
+  backgroundMusicClip: {fileID: 0}
+  gameOverClip: {fileID: 0}
+  victoryClip: {fileID: 0}
 --- !u!1001 &2850690334922232273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -403,6 +415,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7616546415144355813}
   m_SourcePrefab: {fileID: 100100000, guid: 0703a1849c2c89b4db4568688faf0c5f, type: 3}
+--- !u!95 &2850690334914847921 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 0703a1849c2c89b4db4568688faf0c5f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2850690334922232273}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2850690334922099537 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 0703a1849c2c89b4db4568688faf0c5f,

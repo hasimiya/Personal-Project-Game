@@ -198,11 +198,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 5661216178112365744, guid: f8be8fc4a937f594b8cdedcb69dc3eba,
     type: 3}
   projectileSpawnPoint: {fileID: 5568025848145157739}
-  deathClip: {fileID: 8300000, guid: 9c87f285d32fa4569b77ddf3a7e6df5e, type: 3}
-  hittingClip: {fileID: 0}
-  shootingClip: {fileID: 8300000, guid: 430a890fb607d471db897c36240711fa, type: 3}
-  powerUpClip: {fileID: 0}
   enemyType: 2
+  animator: {fileID: 6544824332649658757}
   pointValue: 15
 --- !u!114 &5319257236941925849
 MonoBehaviour:
@@ -453,6 +450,12 @@ BoxCollider:
 --- !u!4 &6544824332642457189 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: f147a01ef442b2345a3546109476c690,
+    type: 3}
+  m_PrefabInstance: {fileID: 6544824332642323685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6544824332649658757 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: f147a01ef442b2345a3546109476c690,
     type: 3}
   m_PrefabInstance: {fileID: 6544824332642323685}
   m_PrefabAsset: {fileID: 0}

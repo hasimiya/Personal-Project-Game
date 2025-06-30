@@ -6,13 +6,9 @@ public class Character : MonoBehaviour
     [SerializeField] protected float speed;
     [SerializeField] protected GameObject projectilePrefab;
     [SerializeField] protected Transform projectileSpawnPoint;
-    public AudioClip deathClip;
-    public AudioClip hittingClip;
-    public AudioClip shootingClip;
-    public AudioClip powerUpClip;
     protected AudioManager audioManager;
-
     protected ParticleSystem deathParticleSystem;
+    public bool isAlive = true;
     protected virtual void Awake()
     {
         rbCharacter = GetComponent<Rigidbody>();
@@ -38,9 +34,12 @@ public class Character : MonoBehaviour
     }
     protected virtual void Fire2()
     {
-        Debug.Log("Fire!");
-        Quaternion shootRotation = Quaternion.LookRotation(Vector3.back);
-        audioManager.PlaySFX(AudioClipType.AudioClipTypeEnum.Shooting);
-        Instantiate(projectilePrefab, projectileSpawnPoint.transform.position, shootRotation);
+        if (isAlive)
+        {
+            Debug.Log("Fire!");
+            Quaternion shootRotation = Quaternion.LookRotation(Vector3.back);
+            audioManager.PlaySFX(AudioClipType.AudioClipTypeEnum.Shooting);
+            Instantiate(projectilePrefab, projectileSpawnPoint.transform.position, shootRotation);
+        }
     }
 }

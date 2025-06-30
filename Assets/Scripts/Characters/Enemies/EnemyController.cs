@@ -5,9 +5,8 @@ public class EnemyController : Character
     public EnemyType enemyType;
     private GameManager gameManager;
     private UIManager uiManager;
-
+    [SerializeField] private Animator animator;
     public int pointValue;
-
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
@@ -26,5 +25,9 @@ public class EnemyController : Character
             if (uiManager.lives != 0)
                 audioManager.PlaySFX(AudioClipType.AudioClipTypeEnum.Hitting);
         }
+    }
+    public Animator GetAnimator()
+    {
+        return animator;
     }
 }
