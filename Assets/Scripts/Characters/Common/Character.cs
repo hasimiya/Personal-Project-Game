@@ -12,6 +12,7 @@ public class Character : MonoBehaviour
     public AudioClip powerUpClip;
     protected AudioManager audioManager;
 
+    protected ParticleSystem deathParticleSystem;
     protected virtual void Awake()
     {
         rbCharacter = GetComponent<Rigidbody>();
@@ -32,14 +33,14 @@ public class Character : MonoBehaviour
     protected virtual void Fire(Vector3 direction)
     {
         Debug.Log("Fire!");
-        audioManager.GetAudioSource(AudioClipType.AudioClipTypeEnum.Shooting);
+        audioManager.PlaySFX(AudioClipType.AudioClipTypeEnum.Shooting);
         Instantiate(projectilePrefab, projectileSpawnPoint.position, rbCharacter.rotation);
     }
     protected virtual void Fire2()
     {
         Debug.Log("Fire!");
         Quaternion shootRotation = Quaternion.LookRotation(Vector3.back);
-        audioManager.GetAudioSource(AudioClipType.AudioClipTypeEnum.Shooting);
+        audioManager.PlaySFX(AudioClipType.AudioClipTypeEnum.Shooting);
         Instantiate(projectilePrefab, projectileSpawnPoint.transform.position, shootRotation);
     }
 }

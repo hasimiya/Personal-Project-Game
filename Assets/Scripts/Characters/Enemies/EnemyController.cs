@@ -24,7 +24,7 @@ public class EnemyController : Character
         {
             uiManager.UpdateLives(-1);
             if (uiManager.lives != 0)
-                audioManager.GetAudioSource(AudioClipType.AudioClipTypeEnum.Hitting);
+                audioManager.PlaySFX(AudioClipType.AudioClipTypeEnum.Hitting);
         }
     }
 }

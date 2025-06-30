@@ -23,14 +23,14 @@ public class TakePowerUp : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && uiManager.lives < 3 && powerUpType == PowerUpType.Potion)
         {
             Debug.Log($"PowerUp {powerUpType} Taken!");
-            audioManager.GetAudioSource(AudioClipType.AudioClipTypeEnum.PowerUp);
+            audioManager.PlaySFX(AudioClipType.AudioClipTypeEnum.PowerUp);
             Destroy(gameObject);
             uiManager.UpdateLives(1);
         }
         if (other.gameObject.CompareTag("Player") && powerUpType == PowerUpType.Coin)
         {
             Debug.Log($"PowerUp {powerUpType} Taken!");
-            audioManager.GetAudioSource(AudioClipType.AudioClipTypeEnum.PowerUp);
+            audioManager.PlaySFX(AudioClipType.AudioClipTypeEnum.PowerUp);
             uiManager.OpenChest();
             gameManager.CollectCoin();
             Destroy(gameObject);

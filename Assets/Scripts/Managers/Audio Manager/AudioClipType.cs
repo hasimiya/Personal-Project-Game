@@ -16,8 +16,12 @@ public class AudioClipType : MonoBehaviour
         Idle,
         Explosion,
         PowerUp,
-        BackgroundMusic
+        BackgroundMusic,
+        GameOver,
+        Victory
     }
+
+    public AudioClip noneClip;
     public AudioClip deathClip;
     public AudioClip hittingClip;
     public AudioClip jumpingClip;
@@ -30,4 +34,6 @@ public class AudioClipType : MonoBehaviour
     public AudioClip explosionClip;
     public AudioClip powerUpClip;
     public AudioClip backgroundMusicClip;
+    public AudioClip gameOverClip;
+    public AudioClip victoryClip;
 }

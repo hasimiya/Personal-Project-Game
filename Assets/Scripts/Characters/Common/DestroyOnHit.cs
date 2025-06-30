@@ -1,4 +1,5 @@
 using UnityEngine;
+using static ParticleSystemType;
 public enum ArrowType
 {
     Player,
@@ -12,12 +13,14 @@ public class DestroyOnHit : MonoBehaviour
     private UIManager uiManager;
     private SpawnManager spawnManager;
     private AudioManager audioManager;
+    private ParticleManager particleManager;
     private void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
         spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
+        particleManager = GameObject.Find("Particle Manager").GetComponent<ParticleManager>();
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -43,7 +46,7 @@ public class DestroyOnHit : MonoBehaviour
         {
             uiManager.UpdateLives(-1);
             if (uiManager.lives != 0)
-                audioManager.GetAudioSource(AudioClipType.AudioClipTypeEnum.Hitting);
+                audioManager.PlaySFX(AudioClipType.AudioClipTypeEnum.Hitting);
         }
         if (tag == "Enemy")
         {
@@ -53,9 +56,10 @@ public class DestroyOnHit : MonoBehaviour
                 if (enemy != null)
                 {
                     Debug.Log("Enemy Destroy!");
-                    audioManager.GetAudioSource(AudioClipType.AudioClipTypeEnum.Death);
+                    audioManager.PlaySFX(AudioClipType.AudioClipTypeEnum.Death);
                     Destroy(enemyTarget);
                     uiManager.UpdateCoinChest(enemy.pointValue);
+                    particleManager.SpawnParticle(ParticleSystemTypeEnum.Destroyed, enemyTarget.transform.position);
                 }
             }
         }

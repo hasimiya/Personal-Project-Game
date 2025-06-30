@@ -66,16 +66,16 @@ public class GameManager : MonoBehaviour
         isGameActive = true;
 
         uiManager.score = 0;
-
         uiManager.scoreText.text = $"Score: {uiManager.score}";
         uiManager.UpdateLives(3);
         uiManager.UpdateWave(waveNumber);
 
-        player.SetActive(true);
-
         spawnManager.SpawnPowerUpPotion();
         spawnManager.SpawnEnemy(waveNumber);
 
+        //audioManager.PlayBackgroundMusic(AudioClipType.AudioClipTypeEnum.BackgroundMusic);
+
+        player.SetActive(true);
         titleScreen.SetActive(false);
         uiScreen.SetActive(true);
     }
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
-        audioManager.GetAudioSource(AudioClipType.AudioClipTypeEnum.Death);
+        audioManager.PlayGameStateMusic(AudioClipType.AudioClipTypeEnum.Death);
         isGameActive = false;
         uiScreen.SetActive(false);
         gameResultScreen.SetActive(true);
@@ -110,6 +110,8 @@ public class GameManager : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         GameObject[] powerUps = GameObject.FindGameObjectsWithTag("PowerUp");
         GameObject[] arrows = GameObject.FindGameObjectsWithTag("Arrow");
+        GameObject[] particles = GameObject.FindGameObjectsWithTag("Particle");
+
         foreach (GameObject enemy in enemies)
         {
             Destroy(enemy);
@@ -121,6 +123,10 @@ public class GameManager : MonoBehaviour
         foreach (GameObject arrow in arrows)
         {
             Destroy(arrow);
+        }
+        foreach (GameObject particle in particles)
+        {
+            Destroy(particle);
         }
     }
     public void RegisterCoin()

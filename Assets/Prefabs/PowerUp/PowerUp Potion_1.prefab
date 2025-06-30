@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2084510144792176991}
   m_Layer: 0
   m_Name: PowerUp Potion_1
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,4 +147,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUpType: 1
-  coinScore: 0

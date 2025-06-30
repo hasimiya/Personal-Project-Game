@@ -5,9 +5,11 @@ using static AudioClipType;
 public class AudioManager : MonoBehaviour
 {
     public AudioSource musicSource;
-    public AudioSource sfxSource;
+    //public AudioSource sfxSource;
     private AudioClipType audioClipType;
     private Dictionary<AudioClipTypeEnum, AudioClip> clipMap;
+    private AudioSource[] sfxSources;
+    public float sfxVolume;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,61 +17,66 @@ public class AudioManager : MonoBehaviour
         //if (test is null)
         //    throw new ArgumentNullException("something went wrong");
         //var a = test.GetComponent<AudioSource>();
-        sfxSource = GameObject.Find("SFX Source").GetComponent<AudioSource>();
-        audioClipType = GameObject.Find("SFX Source").GetComponent<AudioClipType>();
+
         musicSource = GameObject.Find("Music Source").GetComponent<AudioSource>();
+        //sfxSource = GameObject.Find("SFX Source").GetComponent<AudioSource>();
+        audioClipType = GameObject.Find("Audio Manager").GetComponent<AudioClipType>();
 
         clipMap = new Dictionary<AudioClipTypeEnum, AudioClip>
         {
             { AudioClipTypeEnum.Death, audioClipType.deathClip},
             { AudioClipTypeEnum.Hitting, audioClipType.hittingClip},
+            { AudioClipTypeEnum.Jumping, audioClipType.jumpingClip},
+            { AudioClipTypeEnum.Landing, audioClipType.landingClip},
             { AudioClipTypeEnum.Shooting, audioClipType.shootingClip},
-            { AudioClipTypeEnum.PowerUp, audioClipType.powerUpClip}
+            { AudioClipTypeEnum.Reloading, audioClipType.reloadingClip},
+            { AudioClipTypeEnum.Running, audioClipType.runningClip},
+            { AudioClipTypeEnum.Walking, audioClipType.walkingClip},
+            { AudioClipTypeEnum.Idle, audioClipType.idleClip},
+            { AudioClipTypeEnum.Explosion, audioClipType.explosionClip},
+            { AudioClipTypeEnum.PowerUp, audioClipType.powerUpClip},
+            { AudioClipTypeEnum.BackgroundMusic, audioClipType.backgroundMusicClip},
+            { AudioClipTypeEnum.GameOver, audioClipType.gameOverClip},
+            { AudioClipTypeEnum.Victory, audioClipType.victoryClip}
         };
+        sfxSources = new AudioSource[5];
+        for (int i = 0; i < sfxSources.Length; i++)
+        {
+            sfxSources[i] = gameObject.AddComponent<AudioSource>();
+            sfxSources[i].playOnAwake = false;
+            sfxSources[i].volume = sfxVolume;
+        }
     }
 
-    public void GetAudioSource(AudioClipTypeEnum clipType)
+    public void PlaySFX(AudioClipTypeEnum clipType)
     {
+
         if (clipMap.TryGetValue(clipType, out AudioClip clip) && clip != null)
-        // clipMap.TryGetValue - попытка получить значение из словаря по ключу clipType
-        // параметры TryGetValue: 1 - ключ (clipType), 2 - значение (clip)
         {
-            sfxSource.clip = clip;
-            sfxSource.Play();
+            foreach (var source in sfxSources)
+            {
+                if (!source.isPlaying)
+                {
+                    source.clip = clip;
+                    source.Play();
+                    return;
+                }
+            }
+            sfxSources[0].clip = clip;
+            sfxSources[0].Play();
         }
         else
         {
             Debug.LogWarning($"Audio clip not found for {clipType}");
         }
-
-        //switch (clip)
-        //{
-        //    case AudioClipTypeEnum.Death:
-        //        sfxSource.clip = audioClipType.deathClip;
-        //        break;
-        //    case AudioClipTypeEnum.Hitting:
-        //        sfxSource.clip = audioClipType.hittingClip;
-        //        break;
-        //    case AudioClipTypeEnum.Shooting:
-        //        sfxSource.clip = audioClipType.shootingClip;
-        //        break;
-        //    case AudioClipTypeEnum.PowerUp:
-        //        sfxSource.clip = audioClipType.powerUpClip;
-        //        break;
-        //    default:
-        //        //Debug.LogWarning("Audio clip not found for " + clip + " on " + other.name);
-        //        Debug.LogWarning("Audio clip not found for " + clip + " on ");
-        //        return;
-        //}
-
-        //if (sfxSource.clip != null)
-        //{
-        //    sfxSource.Play();
-        //}
-        //else
-        //{
-        //    //Debug.LogWarning("AudioSource is not assigned on " + other.name);
-        //    Debug.LogWarning("AudioSource is not assigned on ");
-        //}
+    }
+    public void PlayGameStateMusic(AudioClipTypeEnum clipType)
+    {
+        if (clipMap.TryGetValue(clipType, out AudioClip clip) && clip != null)
+        {
+            musicSource.clip = clip;
+            musicSource.loop = false;
+            musicSource.Play();
+        }
     }
 }
