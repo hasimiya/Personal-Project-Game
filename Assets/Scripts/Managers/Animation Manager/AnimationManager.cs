@@ -7,7 +7,13 @@ public class AnimationManager : MonoBehaviour
     {
         animator = animatorComponent;
     }
-    public void PlayAnimationDeath()
+    public void PlayAnimation(Animator animator)
+    {
+        AnimationManager animationManager = gameObject.AddComponent<AnimationManager>();
+        animationManager.Initialize(animator);
+        animationManager.PlayDeathAnimation();
+    }
+    public void PlayDeathAnimation()
     {
         if (animator != null)
         {

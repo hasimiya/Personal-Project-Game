@@ -12,11 +12,16 @@ public class TakePowerUp : MonoBehaviour
     private UIManager uiManager;
     private GameManager gameManager;
     private AudioManager audioManager;
+    //public GameObject[] powerUpCollection;
     private void Start()
     {
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
+    }
+    private void Update()
+    {
+        //powerUpCollection = GameObject.FindGameObjectsWithTag("PowerUp");
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -36,5 +41,15 @@ public class TakePowerUp : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    //public void DestroyPowerUp(GameObject[] collection)
+    //{
+    //    foreach (GameObject powerUp in collection)
+    //    {
+    //        if (powerUp != null)
+    //        {
+    //            Destroy(powerUp);
+    //        }
+    //    }
+    //}
 }
 
