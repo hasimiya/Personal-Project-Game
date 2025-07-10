@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyController : Character
+public class EnemyController : Character // INHERITANCE Child Class
 {
     public EnemyType enemyType;
     private GameManager gameManager;
@@ -14,7 +14,7 @@ public class EnemyController : Character
 
         if (enemyType == EnemyType.Skeleton)
         {
-            InvokeRepeating(nameof(Fire2), 2f, 0.5f);
+            InvokeRepeating(nameof(Fire), 2f, 0.5f);
         }
     }
     private void OnCollisionEnter(Collision collision)

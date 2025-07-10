@@ -1,10 +1,9 @@
 using UnityEngine;
 
-public class PlayerController : Character
+public class PlayerController : Character // INHERITANCE Child Class
 {
-    [SerializeField] private float horizontalInput;
-    [SerializeField] private float verticalInput;
-    [SerializeField] private float forceJump;
+    private float horizontalInput;
+    private float verticalInput;
 
     // Update is called once per frame
     void Update()

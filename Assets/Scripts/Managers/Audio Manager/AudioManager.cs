@@ -4,24 +4,20 @@ using static AudioClipType;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioSource musicSource;
-    //public AudioSource sfxSource;
+    private AudioSource musicSource;
     private AudioClipType audioClipType;
-    private Dictionary<AudioClipTypeEnum, AudioClip> clipMap;
     private AudioSource[] sfxSources;
+
+    private Dictionary<AudioClipTypeEnum, AudioClip> clipMap;
+
     public float sfxVolume;
+
     // Start is called before the first frame update
     void Start()
     {
-        //var test = GameObject.Find("SFX Test");
-        //if (test is null)
-        //    throw new ArgumentNullException("something went wrong");
-        //var a = test.GetComponent<AudioSource>();
 
         musicSource = GameObject.Find("Music Source").GetComponent<AudioSource>();
-        //sfxSource = GameObject.Find("SFX Source").GetComponent<AudioSource>();
         audioClipType = GameObject.Find("Audio Manager").GetComponent<AudioClipType>();
-
         clipMap = new Dictionary<AudioClipTypeEnum, AudioClip>
         {
             { AudioClipTypeEnum.Death, audioClipType.deathClip},

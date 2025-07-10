@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject player;
+
     // UI variables
     public GameObject pauseSrceen;
     public GameObject titleScreen;
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI gameResultText;
 
+    // Managers
     private SpawnManager spawnManager;
     private UIManager uiManager;
     private AudioManager audioManager;

@@ -11,13 +11,48 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI waveText;
 
-    public int score;
-    public int lives;
+    private int _score;
+    public int score // ENCAPSULATION
+    {
+        get
+        {
+            return _score;
+        }
+        set
+        {
+            if (value < 0f)
+            {
+                Debug.LogError("Score cannot be negative!");
+            }
+            else
+            {
+                value = _score;
+            }
+        }
+    }
+    private int _lives;
+    public int lives // ENCAPSULATION
+    {
+        get
+        {
+            return _lives;
+        }
+        set
+        {
+            if (value <= 0)
+            {
+                Debug.LogError("Lives cannot be negative!");
+            }
+            else
+            {
+                _lives = value;
+            }
+        }
+    }
 
     // Timer variables
-    public float currentTime;
-    public float startTime = 5f;
-    //private bool timerRunning = true;
+    private float currentTime;
+    private float startTime = 5f;
 
     private int coinChest;
 
@@ -28,8 +63,8 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateScore(int scoreToAdd)
     {
-        score += scoreToAdd;
-        scoreText.text = $"Score: {score}";
+        _score += scoreToAdd;
+        scoreText.text = $"Score: {_score}";
     }
     public void UpdateLives(int health)
     {
@@ -58,7 +93,6 @@ public class UIManager : MonoBehaviour
     {
         currentTime = startTime;
         timerText.gameObject.SetActive(true);
-        //timerRunning = true;
         while (currentTime > 0)
         {
             currentTime -= Time.deltaTime;

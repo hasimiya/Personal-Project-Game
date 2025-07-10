@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour  // INHERITANCE Parent Class
 {
     protected Rigidbody rbCharacter;
     [SerializeField] protected float speed;
@@ -26,13 +26,13 @@ public class Character : MonoBehaviour
         }
         rbCharacter.velocity = direction.normalized * speed;
     }
-    protected virtual void Fire(Vector3 direction)
+    protected virtual void Fire(Vector3 direction) // POLYMORPHISM
     {
         Debug.Log("Fire!");
         audioManager.PlaySFX(AudioClipType.AudioClipTypeEnum.Shooting);
         Instantiate(projectilePrefab, projectileSpawnPoint.position, rbCharacter.rotation);
     }
-    protected virtual void Fire2()
+    protected virtual void Fire() // POLYMORPHISM
     {
         if (isAlive)
         {

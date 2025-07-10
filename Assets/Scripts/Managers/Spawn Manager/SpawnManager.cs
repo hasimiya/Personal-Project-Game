@@ -7,6 +7,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject[] powerUpPrefabs;
 
     [SerializeField] private UIManager uiManager;
+    private GameManager gameManager;
 
     private readonly float spawnRangeX = 23;
     private readonly float spawnRangeZ = 8;
@@ -14,12 +15,9 @@ public class SpawnManager : MonoBehaviour
     private readonly float offsetY = 0.5f;
 
     public int enemyCount;
-    //public int waveNumber = 1;
-    //public int maxWave;
 
     private bool isSpawningNextWave = false;
 
-    private GameManager gameManager;
 
     void Start()
     {
@@ -68,22 +66,18 @@ public class SpawnManager : MonoBehaviour
     }
     public void SpawnChestCoin()
     {
-        //GameObject coin = Instantiate(powerUpPrefabs[1], new Vector3(0, offsetY, 0), powerUpPrefabs[1].transform.rotation);
-        //TakePowerUp takePowerUp = coin.GetComponent<TakePowerUp>();
-        //takePowerUp.coinScore = ;
-
         gameManager.RegisterCoin();
         Instantiate(powerUpPrefabs[1], new Vector3(0, offsetY, 0), powerUpPrefabs[1].transform.rotation);
     }
-    Vector3 GenerateRandomSpawnPosition(float x, float y, float z)
+    Vector3 GenerateRandomSpawnPosition(float x, float y, float z) // POLYMORPHISM
     {
         return new Vector3(x, y, z);
     }
-    Vector3 GenerateRandomSpawnPosition(float x, float z)
+    Vector3 GenerateRandomSpawnPosition(float x, float z) // POLYMORPHISM
     {
         return new Vector3(x, 0, z);
     }
-    Vector3 GenerateRandomSpawnPosition()
+    Vector3 GenerateRandomSpawnPosition() // POLYMORPHISM
     {
         float spawnPositionX = Random.Range(-spawnRangeX, spawnRangeX);
         float spawnPositionZ = Random.Range(-spawnRangeZ, spawnRangeZ);
@@ -102,9 +96,6 @@ public class SpawnManager : MonoBehaviour
         }
         else
         {
-            //yield return new WaitForSeconds(5f);
-            //gameManager.WinGame();
-            //gameManager.CollectCoin();            
             isSpawningNextWave = false;
         }
     }

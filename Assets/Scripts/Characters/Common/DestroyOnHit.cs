@@ -8,20 +8,15 @@ public class DestroyOnHit : MonoBehaviour
 {
     [SerializeField] private ArrowType arrowType;
 
-    private GameManager gameManager;
     private UIManager uiManager;
-    private SpawnManager spawnManager;
     private AudioManager audioManager;
-    private ParticleManager particleManager;
     private AnimationManager animationManager;
+
     private GameObject[] enemies;
     private void Start()
     {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         uiManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
-        spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
-        particleManager = GameObject.Find("Particle Manager").GetComponent<ParticleManager>();
         animationManager = GameObject.Find("Animation Manager").GetComponent<AnimationManager>();
     }
     private void Update()
@@ -46,12 +41,11 @@ public class DestroyOnHit : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void HandleTargetCollision(GameObject enemyTarget, string tag)
+    void HandleTargetCollision(GameObject enemyTarget, string tag) // ABSTRACTION
     {
         if (tag == "Player")
         {
-            //uiManager.UpdateLives(-1);
-            //IsTriggerCollider(enemies);
+            uiManager.UpdateLives(-1);
             if (uiManager.lives != 0)
                 audioManager.PlaySFX(AudioClipType.AudioClipTypeEnum.Hitting);
         }
@@ -88,7 +82,7 @@ public class DestroyOnHit : MonoBehaviour
         Destroy(gameObject);
         Destroy(other);
     }
-    void DestroyEnemy(GameObject[] collection)
+    void DestroyEnemy(GameObject[] collection) // ABSTRACTION
     {
         bool allDead = true;
         foreach (GameObject enemy in collection)
@@ -107,12 +101,10 @@ public class DestroyOnHit : MonoBehaviour
             foreach (GameObject enemy in collection)
             {
                 Destroy(enemy, 1.5f);
-                //TakePowerUp power = new TakePowerUp();
-                //power.DestroyPowerUp(power.powerUpCollection);
             }
         }
     }
-    void IsTriggerCollider(GameObject enemyTarget)
+    void IsTriggerCollider(GameObject enemyTarget) // ABSTRACTION
     {
         BoxCollider boxCollider = enemyTarget.GetComponent<BoxCollider>();
         Rigidbody rb = enemyTarget.GetComponent<Rigidbody>();

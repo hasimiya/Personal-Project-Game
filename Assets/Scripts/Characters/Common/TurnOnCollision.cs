@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class TurnOnCollision : MonoBehaviour
 {
-    [SerializeField] private Vector3 turnRotation = new(0, 180, 0);
-    [SerializeField] private string tagObject = "Bound";
+    private Vector3 turnRotation = new(0, 180, 0);
+    private string tagObject = "Bound";
 
     private Rigidbody rb;
     private bool hasJustTurned = false;
