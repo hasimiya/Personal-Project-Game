@@ -60,7 +60,6 @@
 ---
 
 ## 📷 Скриншоты
-*(добавь изображения геймплея)*
 ![image](https://github.com/user-attachments/assets/dfd6010d-7000-4ab0-bf96-4d4ef1739285)
 ![image](https://github.com/user-attachments/assets/900d0488-3415-47f7-8764-7ba3ef4778ef)
 ![image](https://github.com/user-attachments/assets/700dbc55-754c-46b4-aa37-b63e33734dac)
@@ -85,5 +84,5 @@
 
 ## 💬 Контакты
 
-Разработчик: [Твоё имя или ник]  
-Email: [твоя почта, если хочешь]
+Разработчик: Виталий  
+Email: hachhook@gmail.com
